@@ -1,16 +1,21 @@
 # newsapp
 
-A new Flutter project.
+Proyecto en flutter para el manejo de newsletters, curso udemy
 
-## Getting Started
+## Temas
 
-This project is a starting point for a Flutter application.
+El objetivo del proyecto es mostrar el uso y utilizacion del provider como gestor de estado.
 
-A few resources to get you started if this is your first Flutter project:
+Tambien se incluyen los siguientes temas:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Provider, ChangeNotifierProvider y Multiprovider
+- Http
+- NewsAPI
+- PageView
+- PageControllers
+- Mapas
+- Listas
+- Modelos personalizados
+- Mantener el estado de la aplicación
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
