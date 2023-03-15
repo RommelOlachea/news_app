@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:newsapp/src/services/news_service.dart';
 import 'package:provider/provider.dart';
 
 class TabsPage extends StatelessWidget {
@@ -24,11 +25,12 @@ class _Navegacion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final navegacionMdel = Provider.of<_NavegacionModel>(context);
+    final navegacionModel = Provider.of<_NavegacionModel>(context);
+    final newsService = Provider.of<NewsService>(context);
 
     return BottomNavigationBar(
-        currentIndex: navegacionMdel.paginaActual,
-        onTap: (i) => navegacionMdel.paginaActual = i,
+        currentIndex: navegacionModel.paginaActual,
+        onTap: (i) => navegacionModel.paginaActual = i,
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.person_outline), label: 'Para ti'),
@@ -77,3 +79,5 @@ class _NavegacionModel extends ChangeNotifier {
 
   PageController get pageController => this._pageController;
 }
+
+// 165fbad9254b423ca547b59bb2282486

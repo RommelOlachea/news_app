@@ -19,3 +19,7 @@ Tambien se incluyen los siguientes temas:
 - Mantener el estado de la aplicación
 
 
+Se accede a las suguiente api:
+
+- https://newsapi.org/
+- https://app.quicktype.io/
