@@ -1,13 +1,13 @@
 // To parse this JSON data, do
 //
-//     final newResponse = newResponseFromMap(jsonString);
+//     final newResponse = newResponseFromJson(jsonString);
 
 import 'dart:convert';
 
-NewResponse newResponseFromMap(String str) =>
-    NewResponse.fromMap(json.decode(str));
+NewResponse newResponseFromJson(String str) =>
+    NewResponse.fromJson(json.decode(str));
 
-String newResponseToMap(NewResponse data) => json.encode(data.toMap());
+String newResponseToJson(NewResponse data) => json.encode(data.toJson());
 
 class NewResponse {
   NewResponse({
@@ -20,17 +20,17 @@ class NewResponse {
   int totalResults;
   List<Article> articles;
 
-  factory NewResponse.fromMap(Map<String, dynamic> json) => NewResponse(
+  factory NewResponse.fromJson(Map<String, dynamic> json) => NewResponse(
         status: json["status"],
         totalResults: json["totalResults"],
-        articles:
-            List<Article>.from(json["articles"].map((x) => Article.fromMap(x))),
+        articles: List<Article>.from(
+            json["articles"].map((x) => Article.fromJson(x))),
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJson() => {
         "status": status,
         "totalResults": totalResults,
-        "articles": List<dynamic>.from(articles.map((x) => x.toMap())),
+        "articles": List<dynamic>.from(articles.map((x) => x.toJson())),
       };
 }
 
@@ -55,8 +55,8 @@ class Article {
   DateTime publishedAt;
   String content;
 
-  factory Article.fromMap(Map<String, dynamic> json) => Article(
-        source: Source.fromMap(json["source"]),
+  factory Article.fromJson(Map<String, dynamic> json) => Article(
+        source: Source.fromJson(json["source"]),
         author: json["author"],
         title: json["title"],
         description: json["description"],
@@ -66,8 +66,8 @@ class Article {
         content: json["content"],
       );
 
-  Map<String, dynamic> toMap() => {
-        "source": source.toMap(),
+  Map<String, dynamic> toJson() => {
+        "source": source.toJson(),
         "author": author,
         "title": title,
         "description": description,
@@ -87,12 +87,12 @@ class Source {
   Id id;
   Name name;
 
-  factory Source.fromMap(Map<String, dynamic> json) => Source(
+  factory Source.fromJson(Map<String, dynamic> json) => Source(
         id: idValues.map[json["id"]]!,
         name: nameValues.map[json["name"]]!,
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJson() => {
         "id": idValues.reverse[id],
         "name": nameValues.reverse[name],
       };

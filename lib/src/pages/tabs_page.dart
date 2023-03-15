@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:newsapp/src/pages/tab1_page.dart';
 import 'package:newsapp/src/services/news_service.dart';
 import 'package:provider/provider.dart';
 
@@ -55,7 +56,7 @@ class _Paginas extends StatelessWidget {
       physics:
           NeverScrollableScrollPhysics(), //con esto evitamos el scroll, y no cambiamos de tab
       children: [
-        Container(color: Colors.red),
+        Tab1Page(),
         Container(
           color: Colors.green,
         )
