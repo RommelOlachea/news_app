@@ -34,10 +34,10 @@ class _Noticia extends StatelessWidget {
         _TarjetaImagen(noticia),
         _TarjetaBody(noticia),
         _TarjetaBotones(),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        Divider(),
+        const Divider(),
       ],
     );
   }
@@ -46,7 +46,30 @@ class _Noticia extends StatelessWidget {
 class _TarjetaBotones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          RawMaterialButton(
+            onPressed: () {},
+            fillColor: miTema.accentColor,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Icon(Icons.star_border),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          RawMaterialButton(
+            onPressed: () {},
+            fillColor: Colors.blue,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Icon(Icons.more),
+          )
+        ],
+      ),
+    );
   }
 }
 
