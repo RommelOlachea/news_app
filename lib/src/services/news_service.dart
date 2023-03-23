@@ -56,21 +56,18 @@ class NewsService extends ChangeNotifier {
       return this.categoryArticles[category];
     }
 
-    // final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines', {
-    //   'category': '${category}',
-    //   'pageSize': '20',
-    //   'page': '1',
-    //   'country': 'mx',
-    //   'apiKey': _APIKEY
-    // });
+    final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines', {
+      'category': '${category}',
+      'pageSize': '20',
+      'page': '1',
+      'apiKey': _APIKEY
+    });
 
-    final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines',
-        {'sources': 'techcrunch', 'country': 'mx', 'apiKey': _APIKEY});
+    // final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines',
+    //     {'sources': 'techcrunch', 'country': 'mx', 'apiKey': _APIKEY});
 
-    // {'sources': 'techcrunch', 'apiKey': _APIKEY});
-
-    // final resp = await http.get(url);
-    // final newsResponse = newResponseFromJson(resp.body);
+    final resp = await http.get(url);
+    final newsResponse = newResponseFromJson(resp.body);
 
     print('Cargo las categorias');
     notifyListeners();
