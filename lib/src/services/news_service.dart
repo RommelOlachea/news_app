@@ -10,6 +10,9 @@ final _APIKEY = '165fbad9254b423ca547b59bb2282486';
 
 class NewsService extends ChangeNotifier {
   List<Article> headlines = [];
+
+  String _selectedCategory = 'business';
+
   List<CategoryModel> categories = [
     CategoryModel(FontAwesomeIcons.building, 'business'),
     CategoryModel(FontAwesomeIcons.tv, 'entertainment'),
@@ -20,8 +23,22 @@ class NewsService extends ChangeNotifier {
     CategoryModel(FontAwesomeIcons.memory, 'technology'),
   ];
 
+  Map<String, List<Article>> categoryArticles = {};
+
   NewsService() {
     this.getTopHeadlines();
+
+    categories.forEach((element) {
+      this.categoryArticles[element.name] = [];
+    });
+  }
+
+  String get selectedCategory => this._selectedCategory;
+
+  set selectedCategory(String valor) {
+    this._selectedCategory = valor;
+    this.getArticlesByCategory(valor);
+    notifyListeners();
   }
 
   getTopHeadlines() async {
@@ -31,6 +48,31 @@ class NewsService extends ChangeNotifier {
     final resp = await http.get(url);
     final newsResponse = newResponseFromJson(resp.body);
     this.headlines.addAll(newsResponse.articles);
+    notifyListeners();
+  }
+
+  getArticlesByCategory(String category) async {
+    if (categoryArticles[category]!.length > 0) {
+      return this.categoryArticles[category];
+    }
+
+    // final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines', {
+    //   'category': '${category}',
+    //   'pageSize': '20',
+    //   'page': '1',
+    //   'country': 'mx',
+    //   'apiKey': _APIKEY
+    // });
+
+    final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines',
+        {'sources': 'techcrunch', 'apiKey': _APIKEY});
+
+    // {'sources': 'techcrunch', 'apiKey': _APIKEY});
+
+    final resp = await http.get(url);
+    final newsResponse = newResponseFromJson(resp.body);
+
+    this.categoryArticles[category]?.addAll(newsResponse.articles);
     notifyListeners();
   }
 }
