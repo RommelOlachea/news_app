@@ -65,14 +65,14 @@ class NewsService extends ChangeNotifier {
     // });
 
     final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines',
-        {'sources': 'techcrunch', 'apiKey': _APIKEY});
+        {'sources': 'techcrunch', 'country': 'mx', 'apiKey': _APIKEY});
 
     // {'sources': 'techcrunch', 'apiKey': _APIKEY});
 
-    final resp = await http.get(url);
-    final newsResponse = newResponseFromJson(resp.body);
+    // final resp = await http.get(url);
+    // final newsResponse = newResponseFromJson(resp.body);
 
-    this.categoryArticles[category]?.addAll(newsResponse.articles);
+    print('Cargo las categorias');
     notifyListeners();
   }
 }
