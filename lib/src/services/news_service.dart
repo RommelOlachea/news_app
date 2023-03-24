@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_this
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -41,6 +43,9 @@ class NewsService extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<Article>? get getArticlesSelectedCategory =>
+      this.categoryArticles[this._selectedCategory];
+
   getTopHeadlines() async {
     final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines',
         {'sources': 'techcrunch', 'apiKey': _APIKEY});
@@ -56,18 +61,13 @@ class NewsService extends ChangeNotifier {
       return this.categoryArticles[category];
     }
 
-    // final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines',
-    //     {'sources': 'techcrunch', 'apiKey': _APIKEY});
-
     final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines', {
       'category': '${category}',
+      'country': 'us',
       'pageSize': '20',
       'page': '1',
       'apiKey': _APIKEY
     });
-
-    // final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines',
-    //     {'sources': 'techcrunch', 'country': 'mx', 'apiKey': _APIKEY});
 
     final resp = await http.get(url);
     final newsResponse = newsResponseFromJson(resp.body);

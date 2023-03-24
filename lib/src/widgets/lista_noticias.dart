@@ -100,7 +100,7 @@ class _TarjetaImagen extends StatelessWidget {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(50), bottomRight: Radius.circular(50)),
         child: Container(
-            child: (noticia.urlToImage != null)
+            child: (noticia.urlToImage != null && noticia.urlToImage != '')
                 ? FadeInImage(
                     placeholder: AssetImage('assets/img/giphy.gif'),
                     image: NetworkImage(noticia.urlToImage))

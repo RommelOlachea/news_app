@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newsapp/src/models/category_model.dart';
 import 'package:newsapp/src/services/news_service.dart';
 import 'package:newsapp/src/theme/tema.dart';
+import 'package:newsapp/src/widgets/lista_noticias.dart';
 import 'package:provider/provider.dart';
 
 class Tab2Page extends StatelessWidget {
@@ -9,11 +10,17 @@ class Tab2Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(child: _ListaCategorias()),
-        ],
+    final newsService = Provider.of<NewsService>(context);
+
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            _ListaCategorias(),
+            Expanded(
+                child: ListaNoticias(newsService.getArticlesSelectedCategory!)),
+          ],
+        ),
       ),
     );
   }
@@ -24,28 +31,32 @@ class _ListaCategorias extends StatelessWidget {
   Widget build(BuildContext context) {
     final categories = Provider.of<NewsService>(context).categories;
 
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      itemCount: categories.length,
-      itemBuilder: (BuildContext context, int index) {
-        final cName = categories[index].name;
-        return Container(
-          width: 110,
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                _CategoryButton(categories[index]),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text('${cName[0].toUpperCase()}${cName.substring(1)}'),
-              ],
+    return Container(
+      width: double.infinity,
+      height: 80,
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount: categories.length,
+        itemBuilder: (BuildContext context, int index) {
+          final cName = categories[index].name;
+          return Container(
+            width: 110,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  _CategoryButton(categories[index]),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text('${cName[0].toUpperCase()}${cName.substring(1)}'),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
