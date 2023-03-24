@@ -32,7 +32,12 @@ class _Navegacion extends StatelessWidget {
 
     return BottomNavigationBar(
         currentIndex: navegacionModel.paginaActual,
-        onTap: (i) => navegacionModel.paginaActual = i,
+        onTap: (i) {
+          navegacionModel.paginaActual = i;
+          if (i > 0) {
+            newsService.selectedCategory = newsService.selectedCategory;
+          }
+        },
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.person_outline), label: 'Para ti'),
