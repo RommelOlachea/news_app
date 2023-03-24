@@ -46,7 +46,7 @@ class NewsService extends ChangeNotifier {
         {'sources': 'techcrunch', 'apiKey': _APIKEY});
 
     final resp = await http.get(url);
-    final newsResponse = newResponseFromJson(resp.body);
+    final newsResponse = newsResponseFromJson(resp.body);
     this.headlines.addAll(newsResponse.articles);
     notifyListeners();
   }
@@ -55,6 +55,9 @@ class NewsService extends ChangeNotifier {
     if (categoryArticles[category]!.length > 0) {
       return this.categoryArticles[category];
     }
+
+    // final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines',
+    //     {'sources': 'techcrunch', 'apiKey': _APIKEY});
 
     final url = Uri.https(_URL_BASE_NEWS, 'v2/top-headlines', {
       'category': '${category}',
@@ -67,7 +70,9 @@ class NewsService extends ChangeNotifier {
     //     {'sources': 'techcrunch', 'country': 'mx', 'apiKey': _APIKEY});
 
     final resp = await http.get(url);
-    final newsResponse = newResponseFromJson(resp.body);
+    final newsResponse = newsResponseFromJson(resp.body);
+
+    this.categoryArticles[category]!.addAll(newsResponse.articles);
 
     print('Cargo las categorias');
     notifyListeners();
